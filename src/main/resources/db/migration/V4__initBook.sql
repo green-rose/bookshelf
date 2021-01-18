@@ -2843,3 +2843,5 @@ INSERT INTO `book` (`id_book`, `book_title`, `episode_no`, `year`, `edition_no`,
 (2820, 'Narrenturm', 1, 2005, 2, 'česky', 198, 47),
 (2821, 'Plavba do Sarantina', 1, 2010, 1, 'česky', 364, 105),
 (2822, '59 vteřin', 0, 2011, 1, 'česky', 31, 1);
+
+ALTER TABLE `book` ADD PRIMARY KEY(`id_book`);

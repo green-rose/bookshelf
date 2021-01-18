@@ -9,4 +9,5 @@ public interface BookService {
 
     List<BookDTO> getAllBooks();
 
+    BookDTO getBookById(Integer bookId);
 }

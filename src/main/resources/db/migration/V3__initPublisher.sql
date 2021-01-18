@@ -389,3 +389,5 @@ INSERT INTO `publisher` (`id_publisher`, `publisher`) VALUES
 (418, 'Zvon'),
 (419, 'Bizbooks'),
 (420, 'Grimmus');
+
+ALTER TABLE `publisher` ADD PRIMARY KEY(`id_publisher`);

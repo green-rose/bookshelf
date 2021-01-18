@@ -1382,3 +1382,5 @@ INSERT INTO `author` (`id_author`, `surname`, `names`, `whole_name`) VALUES
 (1540, 'Bárta', 'Miroslav', 'Bárta, Miroslav'),
 (1541, 'Kovář', 'Martin', 'Kovář, Martin'),
 (1542, 'Marx', 'Karel', 'Marx, Karel');
+
+ALTER TABLE `author` ADD PRIMARY KEY(`id_author`);

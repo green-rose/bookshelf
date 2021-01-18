@@ -140,3 +140,5 @@ INSERT INTO `series` (`id_series`, `series`) VALUES
 (128, 'Zeměmoří'),
 (129, 'Zrozen legendou'),
 (130, 'Poutník');
+
+ALTER TABLE `series` ADD PRIMARY KEY(`id_series`);

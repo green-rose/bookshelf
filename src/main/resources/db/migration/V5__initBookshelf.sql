@@ -3044,3 +3044,5 @@ INSERT INTO `bookshelf` (`id_bookshelf`, `book_id_book`, `author_id_author`, `is
 (3028, 2820, 1013, 0, 0),
 (3029, 2821, 551, 0, 0),
 (3030, 2822, 1534, 0, 0);
+
+ALTER TABLE `bookshelf` ADD PRIMARY KEY(`id_bookshelf`);

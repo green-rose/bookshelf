@@ -1,5 +1,6 @@
 package cz.greenrose.bookshelf.services;
 
+import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.DTO.BookDTO;
 import cz.greenrose.bookshelf.DTO.DTOfactory.CreateBookDTO;
 import cz.greenrose.bookshelf.models.Book;
@@ -24,5 +25,14 @@ public class BookServiceImpl implements BookService {
         List<BookDTO> booksDTO = new ArrayList<>();
         books.forEach(book -> booksDTO.add(CreateBookDTO.createBookDTOFromBook(book)));
         return booksDTO;
+    }
+
+    @Override
+    public BookDTO getBookById(Integer bookId) {
+        Book book = this.bookRepository.findById(bookId).orElse(null);
+        if (book == null) {
+            throw new NoIDFoundException("Book id doesn't exist...");
+        }
+        return CreateBookDTO.createBookDTOFromBook(book);
     }
 }

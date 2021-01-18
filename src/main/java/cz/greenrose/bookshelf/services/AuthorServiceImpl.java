@@ -2,6 +2,7 @@ package cz.greenrose.bookshelf.services;
 
 import cz.greenrose.bookshelf.DTO.AuthorDTO;
 import cz.greenrose.bookshelf.DTO.DTOfactory.CreateAuthorDTO;
+import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.models.Author;
 import cz.greenrose.bookshelf.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class AuthorServiceImpl implements AuthorService{
     @Override
     public AuthorDTO getauthorById(Integer authorId) {
         Author author = this.authorRepository.findById(authorId).orElse(null);
+        if (author == null) {
+            throw new NoIDFoundException("Author id doesn't exist...");
+        }
         return CreateAuthorDTO.createAuthorDTOFromAuthor(author);
     }
 }
