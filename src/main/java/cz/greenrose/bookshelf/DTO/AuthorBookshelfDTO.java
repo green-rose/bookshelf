@@ -1,25 +1,25 @@
 package cz.greenrose.bookshelf.DTO;
 
-import java.util.ArrayList;
-import java.util.List;
+public class AuthorBookshelfDTO {
+    private Integer id;
 
-public class AuthorDTO {
-
-    protected Integer id;
     private String surname;
     private String names;
     private String wholeNames;
-    public List<BookBookshelfDTO> authorBooks = new ArrayList<>();
+    private Boolean isEditor;
+    private Boolean isMainAuthor;
 
-    public AuthorDTO(Integer id, String surname, String names, String wholeNames, List<BookBookshelfDTO> authorBooks) {
+    public AuthorBookshelfDTO(Integer id, String surname, String names, String wholeNames, Boolean isEditor,
+                              Boolean isMainAuthor) {
         this.id = id;
         this.surname = surname;
         this.names = names;
         this.wholeNames = wholeNames;
-        this.authorBooks = authorBooks;
+        this.isEditor = isEditor;
+        this.isMainAuthor = isMainAuthor;
     }
 
-    public AuthorDTO() {
+    public AuthorBookshelfDTO() {
     }
 
     public Integer getId() {
@@ -54,11 +54,19 @@ public class AuthorDTO {
         this.wholeNames = wholeNames;
     }
 
-    public List<BookBookshelfDTO> getAuthorBooks() {
-        return authorBooks;
+    public Boolean getEditor() {
+        return isEditor;
     }
 
-    public void setAuthorBooks(List<BookBookshelfDTO> authorBooks) {
-        this.authorBooks = authorBooks;
+    public void setEditor(Boolean editor) {
+        isEditor = editor;
+    }
+
+    public Boolean getMainAuthor() {
+        return isMainAuthor;
+    }
+
+    public void setMainAuthor(Boolean mainAuthor) {
+        isMainAuthor = mainAuthor;
     }
 }

@@ -1,6 +1,8 @@
 package cz.greenrose.bookshelf.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Author {
@@ -13,6 +15,10 @@ public class Author {
     private String names;
     @Column(name = "whole_name")
     private String wholeNames;
+
+    @OneToMany(mappedBy = "author")
+    public List<Bookshelf> bookOfAuthors = new ArrayList<>();
+
 
     public Author(Integer id, String surname, String names, String wholeNames) {
         this.id = id;

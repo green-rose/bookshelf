@@ -1,6 +1,10 @@
 package cz.greenrose.bookshelf.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Series {
@@ -10,6 +14,9 @@ public class Series {
     protected Integer id;
 
     private String series;
+
+    @OneToMany(mappedBy = "series")
+    public List<Book> booksInSeries = new ArrayList<>();
 
     public Series(Integer id, String series) {
         this.id = id;
@@ -33,5 +40,13 @@ public class Series {
 
     public void setSeries(String series) {
         this.series = series;
+    }
+
+    public List<Book> getBooksInSeries() {
+        return booksInSeries;
+    }
+
+    public void setBooksInSeries(List<Book> booksInSeries) {
+        this.booksInSeries = booksInSeries;
     }
 }

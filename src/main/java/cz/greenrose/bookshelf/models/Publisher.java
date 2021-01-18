@@ -1,6 +1,8 @@
 package cz.greenrose.bookshelf.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Publisher {
@@ -10,6 +12,9 @@ public class Publisher {
     protected Integer id;
 
     private String publisher;
+
+    @OneToMany(mappedBy = "publisher")
+    public List<Book> booksOfPublisher = new ArrayList<>();
 
     public Publisher(Integer id, String publisher) {
         this.id = id;

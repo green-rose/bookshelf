@@ -1,5 +1,7 @@
 package cz.greenrose.bookshelf.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity

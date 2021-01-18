@@ -1,7 +1,12 @@
 package cz.greenrose.bookshelf.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
-import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -21,16 +26,22 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "Publisher_id_publisher",referencedColumnName="id_publisher")
+    @JsonBackReference
     private Publisher publisher;
 
     @ManyToOne
     @JoinColumn(name = "Series_id_series",referencedColumnName="id_series")
+    @JsonBackReference
     private Series series;
 
     @Column(name = "episode_no")
     private Integer episodeNumber;
 
     private String language;
+
+    @OneToMany(mappedBy = "book")
+    public List<Bookshelf> authorsOfBook = new ArrayList<>();
+
 
     public Book(Integer id, String bookTitle, Integer editionNumber, Integer year, Publisher publisher, Series series, Integer episodeNumber, String language) {
         this.id = id;

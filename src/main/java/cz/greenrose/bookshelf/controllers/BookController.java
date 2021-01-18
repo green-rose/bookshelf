@@ -1,7 +1,6 @@
 package cz.greenrose.bookshelf.controllers;
 
-import cz.greenrose.bookshelf.models.Book;
-import cz.greenrose.bookshelf.models.Bookshelf;
+import cz.greenrose.bookshelf.DTO.BookDTO;
 import cz.greenrose.bookshelf.services.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class BookController {
     }
 
     @GetMapping("/api/v1/book")
-    public ResponseEntity<List<Bookshelf>> getAllBooks(){
+    public ResponseEntity<List<BookDTO>> getAllBooks(){
         return new ResponseEntity<>(this.bookService.getAllBooks(), HttpStatus.OK);
     }
 }
