@@ -3,14 +3,15 @@
 --
 
 CREATE TABLE `book` (
-    `id_book` int(11) UNSIGNED NOT NULL,
+    `id_book` int(11) UNSIGNED NOT NULL auto_increment,
     `book_title` varchar(256) NOT NULL,
     `episode_no` int(5) UNSIGNED DEFAULT NULL,
     `year` int(4) DEFAULT NULL,
     `edition_no` int(3) UNSIGNED DEFAULT NULL,
     `language` varchar(14) DEFAULT NULL,
     `publisher_id_publisher` int(11) UNSIGNED DEFAULT NULL,
-    `series_id_series` int(11) UNSIGNED DEFAULT NULL
+    `series_id_series` int(11) UNSIGNED DEFAULT NULL,
+    primary key (id_book)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2843,5 +2844,3 @@ INSERT INTO `book` (`id_book`, `book_title`, `episode_no`, `year`, `edition_no`,
 (2820, 'Narrenturm', 1, 2005, 2, 'česky', 198, 47),
 (2821, 'Plavba do Sarantina', 1, 2010, 1, 'česky', 364, 105),
 (2822, '59 vteřin', 0, 2011, 1, 'česky', 31, 1);
-
-ALTER TABLE `book` ADD PRIMARY KEY(`id_book`);

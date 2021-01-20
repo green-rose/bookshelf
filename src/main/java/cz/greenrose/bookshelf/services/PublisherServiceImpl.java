@@ -1,11 +1,9 @@
 package cz.greenrose.bookshelf.services;
 
-import cz.greenrose.bookshelf.DTO.BookDTO;
-import cz.greenrose.bookshelf.DTO.DTOfactory.CreateBookDTO;
 import cz.greenrose.bookshelf.DTO.DTOfactory.CreatePublisherDTO;
 import cz.greenrose.bookshelf.DTO.PublisherDTO;
+import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
-import cz.greenrose.bookshelf.models.Book;
 import cz.greenrose.bookshelf.models.Publisher;
 import cz.greenrose.bookshelf.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
@@ -37,5 +35,26 @@ public class PublisherServiceImpl implements PublisherService{
             throw new NoIDFoundException("Publisher id doesn't exist...");
         }
         return CreatePublisherDTO.createPublisherDTOFromPublisher(publisher);
+    }
+
+    @Override
+    public PublisherDTO savePublisher(PublisherDTO publisherDTO) {
+        Publisher publisher = new Publisher();
+        publisher.setPublisher(publisherDTO.getPublisher());
+        if (this.publisherRepository.findFirstByPublisherEquals(publisherDTO.getPublisher()).orElse(null)!=null) {
+            throw new DuplicateEntryException("Publisher already exists...");
+        }
+        Publisher newPubliser = this.publisherRepository.save(publisher);
+        return CreatePublisherDTO.createPublisherDTOFromPublisher(newPubliser);
+    }
+
+    @Override
+    public Publisher findPublisher(PublisherDTO publisherDTO) {
+        if (this.publisherRepository.findFirstByPublisherEquals(publisherDTO.getPublisher()).orElse(null)!=null){
+            return this.publisherRepository.findFirstByPublisherEquals(publisherDTO.getPublisher()).orElse(null);
+        }
+        Publisher publisher = new Publisher();
+        publisher.setPublisher(publisherDTO.getPublisher());
+        return this.publisherRepository.save(publisher);
     }
 }

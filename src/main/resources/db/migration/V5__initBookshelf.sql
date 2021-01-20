@@ -3,11 +3,12 @@
 --
 
 CREATE TABLE `bookshelf` (
-  `id_bookshelf` int(11) UNSIGNED NOT NULL,
+  `id_bookshelf` int(11) UNSIGNED NOT NULL auto_increment,
   `book_id_book` int(11) UNSIGNED NOT NULL,
   `author_id_author` int(11) UNSIGNED NOT NULL,
   `is_editor` tinyint(1) NOT NULL DEFAULT '0',
-  `is_main_author` tinyint(1) NOT NULL DEFAULT '0'
+  `is_main_author` tinyint(1) NOT NULL DEFAULT '0',
+  primary key (id_bookshelf)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3045,4 +3046,3 @@ INSERT INTO `bookshelf` (`id_bookshelf`, `book_id_book`, `author_id_author`, `is
 (3029, 2821, 551, 0, 0),
 (3030, 2822, 1534, 0, 0);
 
-ALTER TABLE `bookshelf` ADD PRIMARY KEY(`id_bookshelf`);

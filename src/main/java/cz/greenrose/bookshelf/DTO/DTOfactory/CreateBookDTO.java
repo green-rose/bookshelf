@@ -4,7 +4,10 @@ import cz.greenrose.bookshelf.DTO.AuthorBookshelfDTO;
 import cz.greenrose.bookshelf.DTO.BookDTO;
 import cz.greenrose.bookshelf.DTO.PublisherDTO;
 import cz.greenrose.bookshelf.DTO.SeriesDTO;
+import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.models.Book;
+import cz.greenrose.bookshelf.services.PublisherService;
+import cz.greenrose.bookshelf.services.SeriesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,18 @@ public class CreateBookDTO {
                 book.getSeries().getId(),book.getSeries().getSeries()));
 
         return bookDTO;
+    }
+
+    public static Book createBookFromBookDTO(BookDTO bookDTO, SeriesService seriesService, PublisherService publisherService){
+        Book book = new Book();
+        book.setBookTitle(bookDTO.getBookTitle());
+        book.setEditionNumber(bookDTO.getEditionNumber());
+        book.setEpisodeNumber(bookDTO.getEpisodeNumber());
+        book.setLanguage(bookDTO.getLanguage());
+        book.setSeries(seriesService.findSeries(bookDTO.getSeries()));
+        book.setPublisher(publisherService.findPublisher(bookDTO.getPublisher()));
+        book.setYear(bookDTO.getYear());
+        return book;
     }
 
 }

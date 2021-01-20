@@ -4,8 +4,9 @@
 --
 
 CREATE TABLE `series` (
-  `id_series` int(11) UNSIGNED NOT NULL,
-  `series` varchar(256) NOT NULL
+  `id_series` int(11) UNSIGNED NOT NULL auto_increment,
+  `series` varchar(256) NOT NULL,
+    primary key (id_series)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -140,5 +141,3 @@ INSERT INTO `series` (`id_series`, `series`) VALUES
 (128, 'Zeměmoří'),
 (129, 'Zrozen legendou'),
 (130, 'Poutník');
-
-ALTER TABLE `series` ADD PRIMARY KEY(`id_series`);

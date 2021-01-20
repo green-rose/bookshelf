@@ -10,4 +10,6 @@ public interface BookService {
     List<BookDTO> getAllBooks();
 
     BookDTO getBookById(Integer bookId);
+
+    BookDTO saveBookWithAuthors(BookDTO book);
 }

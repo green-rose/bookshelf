@@ -1,6 +1,7 @@
 CREATE TABLE `publisher` (
-  `id_publisher` int(11) UNSIGNED NOT NULL,
-  `publisher` varchar(256) NOT NULL
+  `id_publisher` int(11) UNSIGNED NOT NULL auto_increment,
+  `publisher` varchar(256) NOT NULL,
+  primary key (id_publisher)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -389,5 +390,3 @@ INSERT INTO `publisher` (`id_publisher`, `publisher`) VALUES
 (418, 'Zvon'),
 (419, 'Bizbooks'),
 (420, 'Grimmus');
-
-ALTER TABLE `publisher` ADD PRIMARY KEY(`id_publisher`);

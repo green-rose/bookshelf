@@ -3,10 +3,11 @@
 --
 
 CREATE TABLE `author` (
-  `id_author` int(11) UNSIGNED NOT NULL,
+  `id_author` int(11) UNSIGNED NOT NULL auto_increment,
   `surname` varchar(256) DEFAULT NULL,
   `names` varchar(256) DEFAULT NULL,
-  `whole_name` varchar(256) DEFAULT NULL
+  `whole_name` varchar(256) DEFAULT NULL,
+  primary key (id_author)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1382,5 +1383,3 @@ INSERT INTO `author` (`id_author`, `surname`, `names`, `whole_name`) VALUES
 (1540, 'Bárta', 'Miroslav', 'Bárta, Miroslav'),
 (1541, 'Kovář', 'Martin', 'Kovář, Martin'),
 (1542, 'Marx', 'Karel', 'Marx, Karel');
-
-ALTER TABLE `author` ADD PRIMARY KEY(`id_author`);

@@ -1,11 +1,10 @@
 package cz.greenrose.bookshelf.controllers;
 import cz.greenrose.bookshelf.DTO.AuthorDTO;
+import cz.greenrose.bookshelf.DTO.SeriesDTO;
 import cz.greenrose.bookshelf.services.AuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +25,10 @@ public class AuthorController {
     @GetMapping("/api/v1/author/{authorId}")
     public ResponseEntity<AuthorDTO> getauthorById(@PathVariable Integer authorId){
         return new ResponseEntity<>(this.authorService.getauthorById(authorId), HttpStatus.OK);
+    }
+
+    @PostMapping("/api/v1/author")
+    public ResponseEntity<AuthorDTO> postNewAuthor(@RequestBody AuthorDTO author){
+        return new ResponseEntity<>(this.authorService.savePost(author), HttpStatus.ACCEPTED);
     }
 }
