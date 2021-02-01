@@ -31,13 +31,17 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public SeriesDTO getSeriesById(Integer idSeries) {
-        Series series = this.seriesRepository.findById(idSeries).orElse(null);
-        if (series == null) {
-            throw new NoIDFoundException("Series id doesn't exist...");
-        }
-        return CreateSeriesDTO.createSeriesDTOFromSeries(series);
+    public SeriesDTO getSeriesDTOById(Integer idSeries) {
+
+        return CreateSeriesDTO.createSeriesDTOFromSeries(this.getSeriesById(idSeries));
     }
+
+    public Series getSeriesById(Integer idSeries) {
+        Series series = this.seriesRepository.findById(idSeries).orElse(null);
+        if ( series==null )  throw new NoIDFoundException("Series id doesn't exist...");
+        else return series;
+    }
+
 
     @Override
     public SeriesDTO saveSeries(SeriesDTO seriesDTO){
@@ -58,5 +62,12 @@ public class SeriesServiceImpl implements SeriesService{
         Series series = new Series();
         series.setSeries(seriesDTO.getSeries());
         return this.seriesRepository.save(series);
+    }
+
+    @Override
+    public SeriesDTO updateSeries(Integer idSeries, SeriesDTO seriesDTO) {
+        Series series = this.getSeriesById(idSeries);
+        series.setSeries(seriesDTO.getSeries());
+        return CreateSeriesDTO.createSeriesDTOFromSeries(this.seriesRepository.save(series));
     }
 }

@@ -10,9 +10,11 @@ import java.util.List;
 public interface SeriesService {
     List<SeriesDTO> getAllSeries();
 
-    SeriesDTO getSeriesById(Integer idSeries);
+    SeriesDTO getSeriesDTOById(Integer idSeries);
 
     SeriesDTO saveSeries(SeriesDTO series);
 
     Series findSeries(SeriesDTO series);
+
+    SeriesDTO updateSeries(Integer idSeries, SeriesDTO series);
 }

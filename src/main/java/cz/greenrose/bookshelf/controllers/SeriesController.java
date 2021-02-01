@@ -23,7 +23,7 @@ public class SeriesController {
 
     @GetMapping("/api/v1/series/{idSeries}")
     public ResponseEntity<SeriesDTO> getSeriesById(@PathVariable Integer idSeries){
-        return new ResponseEntity<>(this.seriesService.getSeriesById(idSeries), HttpStatus.OK);
+        return new ResponseEntity<>(this.seriesService.getSeriesDTOById(idSeries), HttpStatus.OK);
     }
 
     @PostMapping("/api/v1/series")
@@ -31,5 +31,9 @@ public class SeriesController {
         return new ResponseEntity<>(this.seriesService.saveSeries(series), HttpStatus.ACCEPTED);
     }
 
+    @PutMapping("/api/v1/series/{idSeries}")
+    public ResponseEntity<SeriesDTO> updateSeries(@PathVariable Integer idSeries, @RequestBody SeriesDTO series){
+        return new ResponseEntity<>(this.seriesService.updateSeries(idSeries, series), HttpStatus.ACCEPTED);
+    }
 
 }
