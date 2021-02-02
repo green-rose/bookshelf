@@ -1,14 +1,13 @@
 package cz.greenrose.bookshelf.services;
 
 import cz.greenrose.bookshelf.DTO.AuthorBookshelfDTO;
-import cz.greenrose.bookshelf.DTO.BookDTO;
 import cz.greenrose.bookshelf.models.Author;
 import cz.greenrose.bookshelf.models.Book;
 import cz.greenrose.bookshelf.models.Bookshelf;
 import cz.greenrose.bookshelf.repositories.AuthorRepository;
 import cz.greenrose.bookshelf.repositories.BookshelfRepository;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookshelfServiceImpl implements BookshelfService{
@@ -33,5 +32,9 @@ public class BookshelfServiceImpl implements BookshelfService{
         bookshelf.setEditor(authorBookshelfDTO.getEditor());
 
       return this.bookshelfRepository.save(bookshelf);
+    }
+    @Transactional
+    public Integer deleteAuthorsFromBook(Book book){
+        return this.bookshelfRepository.deleteAllByBook(book);
     }
 }
