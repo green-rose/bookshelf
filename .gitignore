@@ -61,11 +61,7 @@ crashlytics-build.properties
 fabric.properties
 
 
-*.class
-browscap.csv
-gradle/wrapper
-gradlew.bat
-gradlew
+
 
 # Package Files #
 *.jar
