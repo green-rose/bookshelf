@@ -8,7 +8,11 @@ import java.util.List;
 @Service
 public interface AuthorService {
     List<AuthorDTO> getAllAuthors();
-    AuthorDTO getauthorById(Integer authorId);
+    AuthorDTO getAuthorDTOById(Integer authorId);
 
-    AuthorDTO savePost(AuthorDTO author);
+    AuthorDTO saveAuthor(AuthorDTO author);
+
+    AuthorDTO updateAuthor(Integer idAuthor, AuthorDTO author);
+
+    AuthorDTO deleteAuthor(Integer idAuthor);
 }

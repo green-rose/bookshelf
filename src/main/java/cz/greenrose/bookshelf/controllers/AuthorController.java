@@ -1,5 +1,6 @@
 package cz.greenrose.bookshelf.controllers;
 import cz.greenrose.bookshelf.DTO.AuthorDTO;
+import cz.greenrose.bookshelf.DTO.PublisherDTO;
 import cz.greenrose.bookshelf.DTO.SeriesDTO;
 import cz.greenrose.bookshelf.services.AuthorService;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,22 @@ public class AuthorController {
     }
 
     @GetMapping("/api/v1/author/{authorId}")
-    public ResponseEntity<AuthorDTO> getauthorById(@PathVariable Integer authorId){
-        return new ResponseEntity<>(this.authorService.getauthorById(authorId), HttpStatus.OK);
+    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Integer authorId){
+        return new ResponseEntity<>(this.authorService.getAuthorDTOById(authorId), HttpStatus.OK);
     }
 
     @PostMapping("/api/v1/author")
     public ResponseEntity<AuthorDTO> postNewAuthor(@RequestBody AuthorDTO author){
-        return new ResponseEntity<>(this.authorService.savePost(author), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(this.authorService.saveAuthor(author), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/api/v1/author/{idAuthor}")
+    public ResponseEntity<AuthorDTO> updateAuthor(@PathVariable Integer idAuthor, @RequestBody AuthorDTO author){
+        return new ResponseEntity<>(this.authorService.updateAuthor(idAuthor, author), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/api/v1/author/{idAuthor}")
+    public ResponseEntity<AuthorDTO> deleteAuthor(@PathVariable Integer idAuthor){
+        return new ResponseEntity<>(this.authorService.deleteAuthor(idAuthor), HttpStatus.ACCEPTED);
     }
 }
