@@ -36,4 +36,10 @@ public class SeriesController {
         return new ResponseEntity<>(this.seriesService.updateSeries(idSeries, series), HttpStatus.ACCEPTED);
     }
 
+    @DeleteMapping("/api/v1/series/{idSeries}")
+    public ResponseEntity<SeriesDTO> deleteSeries(@PathVariable Integer idSeries){
+        return new ResponseEntity<>(this.seriesService.deleteSeries(idSeries), HttpStatus.ACCEPTED);
+    }
+
+
 }

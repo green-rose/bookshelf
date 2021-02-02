@@ -1,6 +1,7 @@
 package cz.greenrose.bookshelf.controllers;
 
 import cz.greenrose.bookshelf.DTO.ErrorResponse;
+import cz.greenrose.bookshelf.exceptions.CantDeleteException;
 import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 
@@ -19,6 +20,11 @@ public class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler()
     public ResponseEntity<ErrorResponse> DuplicateEntryException(DuplicateEntryException exception) {
+        return new ResponseEntity<>(new ErrorResponse("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler()
+    public ResponseEntity<ErrorResponse> CantDeleteException(CantDeleteException exception) {
         return new ResponseEntity<>(new ErrorResponse("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 

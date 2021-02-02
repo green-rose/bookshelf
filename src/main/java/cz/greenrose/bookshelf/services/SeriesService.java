@@ -4,6 +4,7 @@ import cz.greenrose.bookshelf.DTO.SeriesDTO;
 import cz.greenrose.bookshelf.models.Series;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -17,4 +18,6 @@ public interface SeriesService {
     Series findSeries(SeriesDTO series);
 
     SeriesDTO updateSeries(Integer idSeries, SeriesDTO series);
+
+    SeriesDTO deleteSeries(Integer idSeries);
 }

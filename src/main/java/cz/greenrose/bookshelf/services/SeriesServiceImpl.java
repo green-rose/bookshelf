@@ -2,12 +2,16 @@ package cz.greenrose.bookshelf.services;
 
 import cz.greenrose.bookshelf.DTO.DTOfactory.CreateSeriesDTO;
 import cz.greenrose.bookshelf.DTO.SeriesDTO;
+import cz.greenrose.bookshelf.exceptions.CantDeleteException;
 import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.models.Series;
 import cz.greenrose.bookshelf.repositories.SeriesRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +73,17 @@ public class SeriesServiceImpl implements SeriesService{
         Series series = this.getSeriesById(idSeries);
         series.setSeries(seriesDTO.getSeries());
         return CreateSeriesDTO.createSeriesDTOFromSeries(this.seriesRepository.save(series));
+    }
+
+    @Override
+    public SeriesDTO deleteSeries(Integer idSeries) {
+        SeriesDTO seriesDTO = this.getSeriesDTOById(idSeries);
+        try {
+            seriesRepository.delete(this.getSeriesById(idSeries));
+        } catch (DataIntegrityViolationException e){
+            throw new CantDeleteException("Series can't be deleted...");
+        }
+
+        return seriesDTO;
     }
 }
