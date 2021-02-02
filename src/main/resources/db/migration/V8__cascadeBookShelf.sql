@@ -1,1 +1,0 @@
-ALTER TABLE `bookshelf` DROP FOREIGN KEY `bookshelf_ibfk_2`; ALTER TABLE `bookshelf` ADD CONSTRAINT `bookshelf_ibfk_4` FOREIGN KEY (`book_id_book`) REFERENCES `book`(`id_book`) ON DELETE CASCADE ON UPDATE RESTRICT;
