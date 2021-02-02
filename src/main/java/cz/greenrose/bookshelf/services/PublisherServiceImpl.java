@@ -2,10 +2,12 @@ package cz.greenrose.bookshelf.services;
 
 import cz.greenrose.bookshelf.DTO.DTOfactory.CreatePublisherDTO;
 import cz.greenrose.bookshelf.DTO.PublisherDTO;
+import cz.greenrose.bookshelf.exceptions.CantDeleteException;
 import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.models.Publisher;
 import cz.greenrose.bookshelf.repositories.PublisherRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,13 +30,17 @@ public class PublisherServiceImpl implements PublisherService{
         return publisherDTO;
     }
 
-    @Override
-    public PublisherDTO getPublisherById(Integer publisherId) {
+    public Publisher getPublisherById(Integer publisherId) {
         Publisher publisher = this.publisherRepository.findById(publisherId).orElse(null);
         if (publisher == null) {
             throw new NoIDFoundException("Publisher id doesn't exist...");
         }
-        return CreatePublisherDTO.createPublisherDTOFromPublisher(publisher);
+        return publisher;
+    }
+
+    @Override
+    public PublisherDTO getPublisherDTOById(Integer publisherId) {
+        return CreatePublisherDTO.createPublisherDTOFromPublisher(this.getPublisherById(publisherId));
     }
 
     @Override
@@ -56,5 +62,23 @@ public class PublisherServiceImpl implements PublisherService{
         Publisher publisher = new Publisher();
         publisher.setPublisher(publisherDTO.getPublisher());
         return this.publisherRepository.save(publisher);
+    }
+
+    @Override
+    public PublisherDTO updatePublisher(Integer idPublisher, PublisherDTO publisherDTO) {
+        Publisher publisher = this.getPublisherById(idPublisher);
+        publisher.setPublisher(publisherDTO.getPublisher());
+        return CreatePublisherDTO.createPublisherDTOFromPublisher(this.publisherRepository.save(publisher));
+    }
+
+    @Override
+    public PublisherDTO deletePublisher(Integer idPublisher) {
+        PublisherDTO publisherDTO = this.getPublisherDTOById(idPublisher);
+        try {
+            publisherRepository.delete(this.getPublisherById(idPublisher));
+        } catch (DataIntegrityViolationException e){
+            throw new CantDeleteException("Publisher can't be deleted...");
+        }
+        return publisherDTO;
     }
 }

@@ -10,9 +10,13 @@ import java.util.List;
 public interface PublisherService {
     List<PublisherDTO> getAllPublishers();
 
-    PublisherDTO getPublisherById(Integer publisherId);
+    PublisherDTO getPublisherDTOById(Integer publisherId);
 
     PublisherDTO savePublisher(PublisherDTO publisher);
 
     Publisher findPublisher(PublisherDTO publisher);
+
+    PublisherDTO updatePublisher(Integer idPublisher, PublisherDTO publisher);
+
+    PublisherDTO deletePublisher(Integer idPublisher);
 }

@@ -5,10 +5,7 @@ import cz.greenrose.bookshelf.models.Series;
 
 public class CreateSeriesDTO {
     public static SeriesDTO createSeriesDTOFromSeries(Series series){
-
         SeriesDTO seriesDTO = new SeriesDTO(series.getId(),series.getSeries());
-
         return seriesDTO;
     }
-
 }

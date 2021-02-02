@@ -1,7 +1,6 @@
 package cz.greenrose.bookshelf.controllers;
 
 import cz.greenrose.bookshelf.DTO.PublisherDTO;
-import cz.greenrose.bookshelf.DTO.SeriesDTO;
 import cz.greenrose.bookshelf.services.PublisherService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class PublisherController {
 
     @GetMapping("/api/v1/publisher/{idPublisher}")
     public ResponseEntity<PublisherDTO> getPublisherById(@PathVariable Integer idPublisher){
-        return new ResponseEntity<>(this.publisherService.getPublisherById(idPublisher), HttpStatus.OK);
+        return new ResponseEntity<>(this.publisherService.getPublisherDTOById(idPublisher), HttpStatus.OK);
     }
 
     @PostMapping("/api/v1/publisher")
@@ -33,4 +32,15 @@ public class PublisherController {
         return new ResponseEntity<>(this.publisherService.savePublisher(publisher), HttpStatus.ACCEPTED);
     }
 
+    @PutMapping("/api/v1/publisher/{idPublisher}")
+    public ResponseEntity<PublisherDTO> updatePublisher(@PathVariable Integer idPublisher, @RequestBody PublisherDTO publisher){
+        return new ResponseEntity<>(this.publisherService.updatePublisher(idPublisher, publisher), HttpStatus.ACCEPTED);
+
+    }
+
+    @DeleteMapping("/api/v1/publisher/{idPublisher}")
+    public ResponseEntity<PublisherDTO> deletePublisher(@PathVariable Integer idPublisher){
+        return new ResponseEntity<>(this.publisherService.deletePublisher(idPublisher), HttpStatus.ACCEPTED);
+
+    }
 }

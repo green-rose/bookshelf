@@ -4,7 +4,6 @@ import cz.greenrose.bookshelf.DTO.AuthorBookshelfDTO;
 import cz.greenrose.bookshelf.DTO.BookDTO;
 import cz.greenrose.bookshelf.DTO.PublisherDTO;
 import cz.greenrose.bookshelf.DTO.SeriesDTO;
-import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.models.Book;
 import cz.greenrose.bookshelf.services.PublisherService;
 import cz.greenrose.bookshelf.services.SeriesService;
