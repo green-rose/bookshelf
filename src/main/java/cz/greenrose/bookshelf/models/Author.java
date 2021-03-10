@@ -11,7 +11,7 @@ public class Author {
     @Column(name = "id_author",length=11, unique = true, nullable = false, insertable = false, updatable = false)
     protected Integer id;
 
-    //test line
+    //test line updated
     private String surname;
     private String names;
     @Column(name = "whole_name")
