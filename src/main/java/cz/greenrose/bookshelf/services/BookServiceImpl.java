@@ -11,6 +11,8 @@ import cz.greenrose.bookshelf.models.*;
 import cz.greenrose.bookshelf.repositories.*;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +39,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getAllBooks(){
-        List<Book> books= this.bookRepository.findAll();
+    public List<BookDTO> getAllBooks(Integer page){
+        Page<Book> books= this.bookRepository.findAll(PageRequest.of(page, 10));
         List<BookDTO> booksDTO = new ArrayList<>();
         books.forEach(book -> booksDTO.add(CreateBookDTO.createBookDTOFromBook(book)));
         return booksDTO;
@@ -77,7 +79,7 @@ public class BookServiceImpl implements BookService {
             }
             Book newBook = this.bookRepository.save(book);
             this.saveAuthorsToBook(bookDTO.getBookAuthors(),newBook);
-            return CreateBookDTO.createBookDTOFromBook(this.bookRepository.getOne(newBook.getId()));
+            return CreateBookDTO.createBookDTOFromBook(this.bookRepository.findById(newBook.getId()).orElse(null));
 
     }
 

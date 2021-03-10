@@ -18,8 +18,9 @@ public class BookController {
     }
 
     @GetMapping("/api/v1/book")
-    public ResponseEntity<List<BookDTO>> getAllBooks(){
-        return new ResponseEntity<>(this.bookService.getAllBooks(), HttpStatus.OK);
+    public ResponseEntity<List<BookDTO>> getAllBooks(@RequestParam(required = false) Integer page){
+        if (page == null) page = 0;
+        return new ResponseEntity<>(this.bookService.getAllBooks(page), HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/book/{bookId}")
