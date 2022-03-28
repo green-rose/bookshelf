@@ -48,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService{
         author.setNames(authorDTO.getNames());
         author.setSurname(authorDTO.getSurname());
         author.setWholeNames(authorDTO.getWholeNames());
-        if (this.authorRepository.findFirstByNamesAndAndSurname(authorDTO.getNames(), authorDTO.getSurname()).orElse(null)!=null) {
+        if (this.authorRepository.findFirstByNamesAndSurname(authorDTO.getNames(), authorDTO.getSurname()).orElse(null)!=null) {
             throw new DuplicateEntryException("Author already exists...");
         }
         Author newAuthor = this.authorRepository.save(author);
@@ -58,7 +58,7 @@ public class AuthorServiceImpl implements AuthorService{
     @Override
     public AuthorDTO updateAuthor(Integer idAuthor, AuthorDTO authorDTO) {
         Author author= this.getAuthorById(idAuthor);
-        Author duplicateAuthor = this.authorRepository.findFirstByNamesAndAndSurname(authorDTO.getNames(), authorDTO.getSurname()).orElse(null);
+        Author duplicateAuthor = this.authorRepository.findFirstByNamesAndSurname(authorDTO.getNames(), authorDTO.getSurname()).orElse(null);
         if (duplicateAuthor!=null && !duplicateAuthor.equals(author)) {
             throw new DuplicateEntryException("Author already exists...");
         }
