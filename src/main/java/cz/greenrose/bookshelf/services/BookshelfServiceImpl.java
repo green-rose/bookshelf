@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookshelfServiceImpl implements BookshelfService{
-    private BookshelfRepository bookshelfRepository;
-    private AuthorRepository authorRepository;
+    private final BookshelfRepository bookshelfRepository;
+    private final AuthorRepository authorRepository;
 
     public BookshelfServiceImpl(BookshelfRepository bookshelfRepository, AuthorRepository authorRepository) {
         this.bookshelfRepository = bookshelfRepository;
@@ -25,7 +25,7 @@ public class BookshelfServiceImpl implements BookshelfService{
         if (authorBookshelfDTO.getId()!=null) {
             author = this.authorRepository.findById(authorBookshelfDTO.getId()).orElse(null);
         } else {
-            author = this.authorRepository.findFirstByNamesAndAndSurname(authorBookshelfDTO.getNames(), authorBookshelfDTO.getSurname()).orElse(null);
+            author = this.authorRepository.findFirstByNamesAndSurname(authorBookshelfDTO.getNames(), authorBookshelfDTO.getSurname()).orElse(null);
         };
         bookshelf.setAuthor(author);
         bookshelf.setMainAuthor(authorBookshelfDTO.getMainAuthor());
