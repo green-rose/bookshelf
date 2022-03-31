@@ -8,22 +8,24 @@ import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.models.Author;
 import cz.greenrose.bookshelf.repositories.AuthorRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AuthorServiceImpl implements AuthorService{
+public class AuthorServiceImpl implements AuthorService {
 
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     public AuthorServiceImpl(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 
-    public List<AuthorDTO> getAllAuthors(){
-        List<Author> authors = this.authorRepository.findAll();
+    public List<AuthorDTO> getAllAuthors(Integer page){
+        Page<Author> authors = this.authorRepository.findAll(PageRequest.of(page, 10));
         List<AuthorDTO> authorDTO = new ArrayList<>();
         authors.forEach(author -> authorDTO.add(CreateAuthorDTO.createAuthorDTOFromAuthor(author)));
         return authorDTO;
@@ -35,11 +37,7 @@ public class AuthorServiceImpl implements AuthorService{
     }
 
     public Author getAuthorById(Integer authorId) {
-        Author author = this.authorRepository.findById(authorId).orElse(null);
-        if (author == null) {
-            throw new NoIDFoundException("Author id doesn't exist...");
-        }
-        return author;
+        return this.authorRepository.findById(authorId).orElseThrow(()->new NoIDFoundException("Author id doesn't exist..."));
     }
 
     @Override

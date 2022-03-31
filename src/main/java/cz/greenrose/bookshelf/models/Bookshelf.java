@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
+@Table
 public class Bookshelf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

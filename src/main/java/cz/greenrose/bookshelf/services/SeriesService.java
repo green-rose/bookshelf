@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface SeriesService {
-    List<SeriesDTO> getAllSeries();
+    List<SeriesDTO> getAllSeries(Integer page);
 
     SeriesDTO getSeriesDTOById(Integer idSeries);
 

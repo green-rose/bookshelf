@@ -3,6 +3,7 @@ package cz.greenrose.bookshelf.controllers;
 import cz.greenrose.bookshelf.DTO.ErrorResponse;
 import cz.greenrose.bookshelf.exceptions.CantDeleteException;
 import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
+import cz.greenrose.bookshelf.exceptions.InvalidEntryException;
 import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler()
     public ResponseEntity<ErrorResponse> CantDeleteException(CantDeleteException exception) {
+        return new ResponseEntity<>(new ErrorResponse("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler()
+    public ResponseEntity<ErrorResponse> InvalidEntryException(InvalidEntryException exception) {
         return new ResponseEntity<>(new ErrorResponse("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 

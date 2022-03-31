@@ -8,6 +8,8 @@ import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.models.Series;
 import cz.greenrose.bookshelf.repositories.SeriesRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -18,16 +20,16 @@ import java.util.List;
 @Service
 public class SeriesServiceImpl implements SeriesService{
 
-    private SeriesRepository seriesRepository;
+    private final SeriesRepository seriesRepository;
 
     public SeriesServiceImpl(SeriesRepository seriesRepository) {
         this.seriesRepository = seriesRepository;
     }
 
     @Override
-    public List<SeriesDTO> getAllSeries() {
+    public List<SeriesDTO> getAllSeries(Integer page) {
 
-        List<Series> allSeries = this.seriesRepository.findAll();
+        Page<Series> allSeries = this.seriesRepository.findAll(PageRequest.of(page, 10));
         List<SeriesDTO> allSeriesDTO = new ArrayList<>();
         allSeries.forEach(series -> allSeriesDTO.add(CreateSeriesDTO.createSeriesDTOFromSeries(series)));
         return allSeriesDTO;
@@ -41,9 +43,7 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     public Series getSeriesById(Integer idSeries) {
-        Series series = this.seriesRepository.findById(idSeries).orElse(null);
-        if ( series==null )  throw new NoIDFoundException("Series id doesn't exist...");
-        else return series;
+        return this.seriesRepository.findById(idSeries).orElseThrow(()->new NoIDFoundException("Series id doesn't exist..."));
     }
 
 

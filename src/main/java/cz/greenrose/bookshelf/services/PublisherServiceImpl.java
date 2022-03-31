@@ -8,6 +8,8 @@ import cz.greenrose.bookshelf.exceptions.NoIDFoundException;
 import cz.greenrose.bookshelf.models.Publisher;
 import cz.greenrose.bookshelf.repositories.PublisherRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,19 +25,15 @@ public class PublisherServiceImpl implements PublisherService{
     }
 
     @Override
-    public List<PublisherDTO> getAllPublishers() {
-        List<Publisher> publishers = this.publisherRepository.findAll();
+    public List<PublisherDTO> getAllPublishers(Integer page) {
+        Page<Publisher> publishers = this.publisherRepository.findAll(PageRequest.of(page, 10));
         List<PublisherDTO> publisherDTO = new ArrayList<>();
         publishers.forEach(publisher -> publisherDTO.add(CreatePublisherDTO.createPublisherDTOFromPublisher(publisher)));
         return publisherDTO;
     }
 
     public Publisher getPublisherById(Integer publisherId) {
-        Publisher publisher = this.publisherRepository.findById(publisherId).orElse(null);
-        if (publisher == null) {
-            throw new NoIDFoundException("Publisher id doesn't exist...");
-        }
-        return publisher;
+        return this.publisherRepository.findById(publisherId).orElseThrow(()->new NoIDFoundException("Publisher id doesn't exist..."));
     }
 
     @Override

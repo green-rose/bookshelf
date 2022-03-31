@@ -10,13 +10,17 @@ import cz.greenrose.bookshelf.DTO.DTOfactory.CreateBookDTO;
 import cz.greenrose.bookshelf.models.*;
 import cz.greenrose.bookshelf.repositories.*;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -24,7 +28,7 @@ public class BookServiceImpl implements BookService {
     public AuthorRepository authorRepository;
     public SeriesService seriesService;
     public PublisherService publisherService;
-    private BookshelfService bookshelfService;
+    private final BookshelfService bookshelfService;
 
     public BookServiceImpl(BookRepository bookRepository,
                            AuthorRepository authorRepository,
@@ -48,11 +52,7 @@ public class BookServiceImpl implements BookService {
 
 
     private Book getBookById(Integer bookId) {
-        Book book = this.bookRepository.findById(bookId).orElse(null);
-        if (book == null) {
-            throw new NoIDFoundException("Book id doesn't exist...");
-        }
-        return book;
+        return this.bookRepository.findById(bookId).orElseThrow(()->new NoIDFoundException("Book id doesn't exist..."));
     }
 
     @Override
@@ -66,12 +66,12 @@ public class BookServiceImpl implements BookService {
                 this.bookshelfService.addAuthorDTOsToBook(book,bookAuthor);
             });
         }catch(Exception e){
-            throw new InvalidEntryException("Author to book couldn't be added ...");
+            throw new InvalidEntryException("Author to book couldn't be added ..." + e.getMessage());
         }
     }
     @Override
+    @Transactional
     public BookDTO saveBookWithAuthors(BookDTO bookDTO) {
-
             Book book = CreateBookDTO.createBookFromBookDTO(bookDTO, this.seriesService, this.publisherService);
             if (this.bookRepository.findFirstByBookTitleAndPublisherAndYearAndEditionNumberAndLanguage(
                     book.getBookTitle(), book.getPublisher(), book.getYear(), book.getEditionNumber(), book.getLanguage()).orElse(null) != null) {
@@ -79,7 +79,7 @@ public class BookServiceImpl implements BookService {
             }
             Book newBook = this.bookRepository.save(book);
             this.saveAuthorsToBook(bookDTO.getBookAuthors(),newBook);
-            return CreateBookDTO.createBookDTOFromBook(this.bookRepository.findById(newBook.getId()).orElse(null));
+            return CreateBookDTO.createBookDTOFromBook(this.bookRepository.findById(newBook.getId()).orElseThrow(()->new InvalidEntryException("Author to book couldn't be added ...")));
 
     }
 

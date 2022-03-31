@@ -17,8 +17,9 @@ public class SeriesController {
     }
 
     @GetMapping("/api/v1/series")
-    public ResponseEntity<List<SeriesDTO>> getAllSeries(){
-        return new ResponseEntity<>(this.seriesService.getAllSeries(), HttpStatus.OK);
+    public ResponseEntity<List<SeriesDTO>> getAllSeries(@RequestParam(required = false) Integer page){
+        if (page == null) page = 0;
+        return new ResponseEntity<>(this.seriesService.getAllSeries(page), HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/series/{idSeries}")

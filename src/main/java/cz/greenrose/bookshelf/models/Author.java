@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

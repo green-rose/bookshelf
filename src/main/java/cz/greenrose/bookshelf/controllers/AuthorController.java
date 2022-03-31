@@ -1,7 +1,5 @@
 package cz.greenrose.bookshelf.controllers;
 import cz.greenrose.bookshelf.DTO.AuthorDTO;
-import cz.greenrose.bookshelf.DTO.PublisherDTO;
-import cz.greenrose.bookshelf.DTO.SeriesDTO;
 import cz.greenrose.bookshelf.services.AuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +17,9 @@ public class AuthorController {
     }
 
     @GetMapping("/api/v1/author")
-    public ResponseEntity<List<AuthorDTO>> getAllAuthors(){
-        return new ResponseEntity<>(this.authorService.getAllAuthors(), HttpStatus.OK);
+    public ResponseEntity<List<AuthorDTO>> getAllAuthors(@RequestParam(required = false) Integer page){
+        if (page == null) page = 0;
+        return new ResponseEntity<>(this.authorService.getAllAuthors(page), HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/author/{authorId}")

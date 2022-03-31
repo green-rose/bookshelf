@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface AuthorService {
-    List<AuthorDTO> getAllAuthors();
+    List<AuthorDTO> getAllAuthors(Integer page);
     AuthorDTO getAuthorDTOById(Integer authorId);
 
     AuthorDTO saveAuthor(AuthorDTO author);

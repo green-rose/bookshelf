@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface PublisherService {
-    List<PublisherDTO> getAllPublishers();
+    List<PublisherDTO> getAllPublishers(Integer page);
 
     PublisherDTO getPublisherDTOById(Integer publisherId);
 

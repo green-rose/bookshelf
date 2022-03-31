@@ -18,8 +18,9 @@ public class PublisherController {
     }
 
     @GetMapping("/api/v1/publisher")
-    public ResponseEntity<List<PublisherDTO>> getAllPublishers(){
-        return new ResponseEntity<>(this.publisherService.getAllPublishers(), HttpStatus.OK);
+    public ResponseEntity<List<PublisherDTO>> getAllPublishers(@RequestParam(required = false) Integer page){
+        if (page == null) page = 0;
+        return new ResponseEntity<>(this.publisherService.getAllPublishers(page), HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/publisher/{idPublisher}")
