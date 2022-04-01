@@ -11,12 +11,12 @@ public class CreateAuthorDTO {
 
         AuthorDTO authorDTO = new AuthorDTO();
 
-        List<BookBookshelfDTO> bookBookshelfDTO = new ArrayList<>();
+        List<BookBookauthorDTO> bookBookauthorDTO = new ArrayList<>();
 
         author.bookOfAuthors.forEach(
-                bookshelf -> bookBookshelfDTO.add(
-                        CreateBookBookshelfDTO.CreateBookBookshelfDTOFromBookshelf(bookshelf)));
-        authorDTO.setAuthorBooks(bookBookshelfDTO);
+                bookauthor -> bookBookauthorDTO.add(
+                        CreateBookBookauthorDTO.CreateBookBookauthorDTOFromBookauthor(bookauthor)));
+        authorDTO.setAuthorBooks(bookBookauthorDTO);
         authorDTO.setId(author.getId());
         authorDTO.setNames(author.getNames());
         authorDTO.setSurname(author.getSurname());

@@ -6,10 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Bookshelf {
+public class Bookauthor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_bookshelf",length=11, unique = true, nullable = false, insertable = false, updatable = false)
+    @Column(name = "id_bookauthor",length=11, unique = true, nullable = false, insertable = false, updatable = false)
     protected Integer id;
 
     @ManyToOne
@@ -26,7 +26,7 @@ public class Bookshelf {
     @Column(name = "is_main_author")
     private Boolean isMainAuthor;
 
-    public Bookshelf(Integer id, Book book, Author author, Boolean isEditor, Boolean isMainAuthor) {
+    public Bookauthor(Integer id, Book book, Author author, Boolean isEditor, Boolean isMainAuthor) {
         this.id = id;
         this.book = book;
         this.author = author;
@@ -34,7 +34,7 @@ public class Bookshelf {
         this.isMainAuthor = isMainAuthor;
     }
 
-    public Bookshelf() {
+    public Bookauthor() {
     }
 
     public Integer getId() {

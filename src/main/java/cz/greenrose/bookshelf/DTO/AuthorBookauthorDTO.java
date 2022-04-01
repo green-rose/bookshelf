@@ -1,6 +1,6 @@
 package cz.greenrose.bookshelf.DTO;
 
-public class AuthorBookshelfDTO {
+public class AuthorBookauthorDTO {
     private Integer id;
 
     private String surname;
@@ -9,8 +9,8 @@ public class AuthorBookshelfDTO {
     private Boolean isEditor;
     private Boolean isMainAuthor;
 
-    public AuthorBookshelfDTO(Integer id, String surname, String names, String wholeNames, Boolean isEditor,
-                              Boolean isMainAuthor) {
+    public AuthorBookauthorDTO(Integer id, String surname, String names, String wholeNames, Boolean isEditor,
+                               Boolean isMainAuthor) {
         this.id = id;
         this.surname = surname;
         this.names = names;
@@ -19,7 +19,7 @@ public class AuthorBookshelfDTO {
         this.isMainAuthor = isMainAuthor;
     }
 
-    public AuthorBookshelfDTO() {
+    public AuthorBookauthorDTO() {
     }
 
     public Integer getId() {

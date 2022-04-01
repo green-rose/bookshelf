@@ -19,7 +19,7 @@ public class Author {
     private String wholeNames;
 
     @OneToMany(mappedBy = "author")
-    public List<Bookshelf> bookOfAuthors = new ArrayList<>();
+    public List<Bookauthor> bookOfAuthors = new ArrayList<>();
 
 
     public Author(Integer id, String surname, String names, String wholeNames) {

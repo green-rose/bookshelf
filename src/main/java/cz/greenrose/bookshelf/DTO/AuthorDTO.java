@@ -9,9 +9,9 @@ public class AuthorDTO {
     private String surname;
     private String names;
     private String wholeNames;
-    public List<BookBookshelfDTO> authorBooks = new ArrayList<>();
+    public List<BookBookauthorDTO> authorBooks = new ArrayList<>();
 
-    public AuthorDTO(Integer id, String surname, String names, String wholeNames, List<BookBookshelfDTO> authorBooks) {
+    public AuthorDTO(Integer id, String surname, String names, String wholeNames, List<BookBookauthorDTO> authorBooks) {
         this.id = id;
         this.surname = surname;
         this.names = names;
@@ -54,11 +54,11 @@ public class AuthorDTO {
         this.wholeNames = wholeNames;
     }
 
-    public List<BookBookshelfDTO> getAuthorBooks() {
+    public List<BookBookauthorDTO> getAuthorBooks() {
         return authorBooks;
     }
 
-    public void setAuthorBooks(List<BookBookshelfDTO> authorBooks) {
+    public void setAuthorBooks(List<BookBookauthorDTO> authorBooks) {
         this.authorBooks = authorBooks;
     }
 }

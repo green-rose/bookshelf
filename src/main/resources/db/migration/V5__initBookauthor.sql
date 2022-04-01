@@ -1,21 +1,21 @@
 --
--- Table structure for table `Bookshelf`
+-- Table structure for table `Bookauthor`
 --
 
-CREATE TABLE `bookshelf` (
-  `id_bookshelf` int(11) UNSIGNED NOT NULL auto_increment,
+CREATE TABLE `bookauthor` (
+  `id_bookauthor` int(11) UNSIGNED NOT NULL auto_increment,
   `book_id_book` int(11) UNSIGNED NOT NULL,
   `author_id_author` int(11) UNSIGNED NOT NULL,
   `is_editor` tinyint(1) NOT NULL DEFAULT '0',
   `is_main_author` tinyint(1) NOT NULL DEFAULT '0',
-  primary key (id_bookshelf)
+  primary key (id_bookauthor)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Bookshelf`
+-- Dumping data for table `Bookauthor`
 --
 
-INSERT INTO `bookshelf` (`id_bookshelf`, `book_id_book`, `author_id_author`, `is_editor`, `is_main_author`) VALUES
+INSERT INTO `bookauthor` (`id_bookauthor`, `book_id_book`, `author_id_author`, `is_editor`, `is_main_author`) VALUES
 (1, 1, 1, 0, 0),
 (2, 2, 580, 0, 0),
 (3, 3, 1, 0, 0),
@@ -2272,7 +2272,7 @@ INSERT INTO `bookshelf` (`id_bookshelf`, `book_id_book`, `author_id_author`, `is
 (2254, 2254, 237, 0, 0),
 (2255, 2255, 237, 0, 0),
 (2256, 2256, 424, 0, 0);
-INSERT INTO `bookshelf` (`id_bookshelf`, `book_id_book`, `author_id_author`, `is_editor`, `is_main_author`) VALUES
+INSERT INTO `bookauthor` (`id_bookauthor`, `book_id_book`, `author_id_author`, `is_editor`, `is_main_author`) VALUES
 (2257, 2257, 348, 0, 0),
 (2258, 2258, 1042, 0, 0),
 (2259, 2259, 1104, 0, 0),

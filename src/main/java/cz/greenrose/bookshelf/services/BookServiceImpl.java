@@ -1,6 +1,6 @@
 package cz.greenrose.bookshelf.services;
 
-import cz.greenrose.bookshelf.DTO.AuthorBookshelfDTO;
+import cz.greenrose.bookshelf.DTO.AuthorBookauthorDTO;
 import cz.greenrose.bookshelf.exceptions.CantDeleteException;
 import cz.greenrose.bookshelf.exceptions.DuplicateEntryException;
 import cz.greenrose.bookshelf.exceptions.InvalidEntryException;
@@ -10,7 +10,6 @@ import cz.greenrose.bookshelf.DTO.DTOfactory.CreateBookDTO;
 import cz.greenrose.bookshelf.models.*;
 import cz.greenrose.bookshelf.repositories.*;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,13 +27,13 @@ public class BookServiceImpl implements BookService {
     public AuthorRepository authorRepository;
     public SeriesService seriesService;
     public PublisherService publisherService;
-    private final BookshelfService bookshelfService;
+    private final BookauthorService bookshelfService;
 
     public BookServiceImpl(BookRepository bookRepository,
                            AuthorRepository authorRepository,
                            SeriesService seriesService,
                            PublisherService publisherService,
-                           BookshelfService bookshelfService) {
+                           BookauthorService bookshelfService) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.seriesService = seriesService;
@@ -60,7 +59,7 @@ public class BookServiceImpl implements BookService {
         return CreateBookDTO.createBookDTOFromBook(this.getBookById(bookId));
     }
 
-    private void saveAuthorsToBook(List<AuthorBookshelfDTO> bookAuthors, Book book){
+    private void saveAuthorsToBook(List<AuthorBookauthorDTO> bookAuthors, Book book){
         try {
             bookAuthors.forEach(bookAuthor -> {
                 this.bookshelfService.addAuthorDTOsToBook(book,bookAuthor);

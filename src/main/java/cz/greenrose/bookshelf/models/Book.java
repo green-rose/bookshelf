@@ -41,7 +41,7 @@ public class Book {
     private String language;
 
     @OneToMany(mappedBy = "book")
-    public List<Bookshelf> authorsOfBook = new ArrayList<>();
+    public List<Bookauthor> authorsOfBook = new ArrayList<>();
 
 
     public Book(Integer id, String bookTitle, Integer editionNumber, Integer year, Publisher publisher, Series series, Integer episodeNumber, String language) {

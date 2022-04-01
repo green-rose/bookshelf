@@ -1,6 +1,6 @@
 package cz.greenrose.bookshelf.DTO.DTOfactory;
 
-import cz.greenrose.bookshelf.DTO.AuthorBookshelfDTO;
+import cz.greenrose.bookshelf.DTO.AuthorBookauthorDTO;
 import cz.greenrose.bookshelf.DTO.BookDTO;
 import cz.greenrose.bookshelf.DTO.PublisherDTO;
 import cz.greenrose.bookshelf.DTO.SeriesDTO;
@@ -15,13 +15,13 @@ public class CreateBookDTO {
     public static BookDTO createBookDTOFromBook(Book book){
 
         BookDTO bookDTO = new BookDTO();
-        List<AuthorBookshelfDTO> authorBookshelfDTO = new ArrayList<>();
+        List<AuthorBookauthorDTO> authorBookauthorDTO = new ArrayList<>();
 
         book.authorsOfBook.forEach(
-                bookshelf -> authorBookshelfDTO.add(
-                        CreateAuthorBookshelfDTO.CreateAuthorBookshelfDTOFromBookshelf(bookshelf)));
+                bookauthor -> authorBookauthorDTO.add(
+                        CreateAuthorBookauthorDTO.CreateAuthorBookauthorDTOFromBookauthor(bookauthor)));
 
-        bookDTO.setBookAuthors(authorBookshelfDTO);
+        bookDTO.setBookAuthors(authorBookauthorDTO);
         bookDTO.setBookTitle(book.getBookTitle());
         bookDTO.setBookId(book.getId());
         bookDTO.setEditionNumber(book.getEditionNumber());

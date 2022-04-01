@@ -6,7 +6,7 @@ import java.util.List;
 public class BookDTO {
     public Integer bookId;
     public String bookTitle;
-    public List<AuthorBookshelfDTO> bookAuthors = new ArrayList<>();
+    public List<AuthorBookauthorDTO> bookAuthors = new ArrayList<>();
     private Integer editionNumber;
     private Integer year;
     private PublisherDTO publisher;
@@ -33,11 +33,11 @@ public class BookDTO {
         this.bookTitle = bookTitle;
     }
 
-    public List<AuthorBookshelfDTO> getBookAuthors() {
+    public List<AuthorBookauthorDTO> getBookAuthors() {
         return bookAuthors;
     }
 
-    public void setBookAuthors(List<AuthorBookshelfDTO> bookAuthors) {
+    public void setBookAuthors(List<AuthorBookauthorDTO> bookAuthors) {
         this.bookAuthors = bookAuthors;
     }
 
